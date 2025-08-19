@@ -1,0 +1,102 @@
+{
+  "info": {
+    "name": "School Management APIs",
+    "_postman_id": "c3f7b2f4-07b6-4e9a-9f5b-1e5b12345678",
+    "description": "Collection for /addSchool and /listSchools endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/addSchool",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "addSchool"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Springfield Elementary\",\n  \"address\": \"742 Evergreen Terrace, Springfield\",\n  \"latitude\": 37.7749,\n  \"longitude\": -122.4194\n}"
+        },
+        "description": "Adds a new school with validation"
+      },
+      "response": []
+    },
+    {
+      "name": "List Schools (by proximity)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/listSchools?lat=37.7749&lng=-122.4194",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "listSchools"
+          ],
+          "query": [
+            {
+              "key": "lat",
+              "value": "37.7749"
+            },
+            {
+              "key": "lng",
+              "value": "-122.4194"
+            }
+          ]
+        },
+        "description": "Fetches schools sorted by distance from provided coordinates"
+      },
+      "response": []
+    },
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set baseUrl to local by default",
+          "if (!pm.collectionVariables.get('baseUrl')) {",
+          "  pm.collectionVariables.set('baseUrl', 'http://localhost:8080');",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
